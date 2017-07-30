@@ -3,16 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "spectacle": "^2.1.1"
+  },
+  "devDependencies": {
+    "react-scripts-ts": "2.5.0",
     "@types/jest": "^20.0.5",
     "@types/node": "^8.0.17",
     "@types/react": "^15.6.0",
     "@types/react-dom": "^15.5.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-scripts-ts": "2.5.0",
-    "spectacle": "^2.1.1"
-  },
-  "devDependencies": {
     "@types/spectacle": "^1.1.6"
   },
   "scripts": {
