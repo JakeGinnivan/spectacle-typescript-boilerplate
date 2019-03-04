@@ -19,16 +19,11 @@ const theme = createTheme(
         secondary: 'Helvetica'
     }
 )
-// interface State {
-//     // tslint:disable-next-line:no-any
-//     slides?: React.ReactElement<any>[]
-// }
 
 export const Presentation: FunctionComponent = () => {
     const [slides, setSlides] = useState([] as React.ReactElement[])
 
     useEffect(() => {
-        // ComponentDidMount
         const slidesContext = require.context('./slides', true, /(.*\/.*.tsx)$/)
         const loadedSlides = slidesContext
             .keys()
