@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState, useEffect, FunctionComponent } from 'react'
 import { Deck } from 'spectacle'
 
 import createTheme from 'spectacle/lib/themes/default'
@@ -18,15 +19,11 @@ const theme = createTheme(
         secondary: 'Helvetica'
     }
 )
-interface State {
-    // tslint:disable-next-line:no-any
-    slides?: React.ReactElement<any>[]
-}
 
-export class Presentation extends React.Component<{}, State> {
-    state: State = {}
+export const Presentation: FunctionComponent = () => {
+    const [slides, setSlides] = useState([] as React.ReactElement[])
 
-    componentDidMount() {
+    useEffect(() => {
         const slidesContext = require.context('./slides', true, /(.*\/.*.tsx)$/)
         const loadedSlides = slidesContext
             .keys()
@@ -43,21 +40,14 @@ export class Presentation extends React.Component<{}, State> {
                 return acc
             }, [])
 
-        this.setState({
-            slides: loadedSlides
-        })
-    }
-    render() {
-        if (!this.state.slides) {
-            return <div>Loading...</div>
-        }
+        setSlides(loadedSlides)
+    }, [])
 
-        return (
-            <Deck transition={['zoom', 'slide']} transitionDuration={500} theme={theme}>
-                {this.state.slides.map((slide, index) => {
-                    return React.cloneElement(slide, { key: index })
-                })}
-            </Deck>
-        )
-    }
+    return (
+        <Deck transition={['zoom', 'slide']} transitionDuration={500} theme={theme}>
+            {slides.map((slide, index) => {
+                return React.cloneElement(slide, { key: index })
+            })}
+        </Deck>
+    )
 }
